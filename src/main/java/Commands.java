@@ -16,6 +16,10 @@ public class Commands {
     }
 
     public static String typeCommand(String cmd) {
-        return Utils.findExecutableOnPath(cmd);
+        System.out.println(Utils.findExecutableOnPath(cmd));
+        if (commandExists(cmd))
+            return cmd + " is a shell builtin";
+        else
+            return Utils.findExecutableOnPath(cmd);
     }
 }
