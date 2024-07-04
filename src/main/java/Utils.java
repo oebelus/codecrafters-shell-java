@@ -1,5 +1,9 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.List;
 
 public class Utils {
     public static String[] tokenize(String str) {
@@ -33,5 +37,20 @@ public class Utils {
             }
         }
         return false;
+    }
+
+    public static String buildProcess(String[] command) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        Process process = processBuilder.start();
+
+        StringBuilder output = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            output.append(line);
+        }
+
+        return output.toString().trim();
     }
 }

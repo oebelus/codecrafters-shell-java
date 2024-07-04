@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +10,7 @@ public class Commands {
         commands.add("cd");
         commands.add("exit");
         commands.add("type");
+        commands.add("pwd");
     }
 
     public static boolean commandExists(String command) {
@@ -34,17 +33,10 @@ public class Commands {
 
         String[] command = { exePath, name };
 
-        ProcessBuilder processBuilder = new ProcessBuilder(command);
-        Process process = processBuilder.start();
+        return Utils.buildProcess(command);
+    }
 
-        StringBuilder output = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-            output.append(line);
-        }
-
-        return output.toString().trim();
+    public static String getDirectory() {
+        return System.getProperty("user.dir");
     }
 }
