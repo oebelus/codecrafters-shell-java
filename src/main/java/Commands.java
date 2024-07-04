@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Commands {
@@ -46,9 +47,46 @@ public class Commands {
 
     public static void changeDirectory(String directory) {
         Path path = Paths.get(directory);
-        if (Files.exists(path))
-            System.setProperty("user.dir", directory);
-        else
-            System.out.println("cd: " + directory + ": No such file or directory");
+        String pwd = getDirectory();
+        String[] pwdArray = pwd.split("\\\\");
+        String[] relative = { "./", "../" };
+
+        int index = 0;
+        int twoCount = 0;
+
+        while (index != -1) {
+            index = directory.indexOf(relative[1], index);
+            if (index != -1) {
+                twoCount++;
+                index += relative[1].length();
+            }
+        }
+
+        if (twoCount > 0) {
+            String newPath = String.join("/", Arrays.copyOfRange(pwdArray, 0, pwdArray.length - twoCount));
+            System.setProperty("user.dir", newPath);
+        } else if (directory.startsWith("./")) {
+            pwd += "\\" + directory.substring(2);
+            if (Files.exists(Paths.get(pwd)))
+                System.setProperty("user.dir", pwd);
+            else {
+                System.out.println("cd: " + pwd + ": No such file or directory");
+            }
+        } else {
+            if (Files.exists(path)) {
+                System.setProperty("user.dir", directory);
+            } else {
+                System.out.println("cd: " + directory + ": No such file or directory");
+            }
+        }
+        // System.out.println(oneCount);
+        // System.out.println(twoCount);
+
+        // if (pwd.contains(directory)) {
+        // System.setProperty("user.dir", directory);
+        // } else if (Files.exists(path))
+        // System.setProperty("user.dir", directory);
+        // else
+        // System.out.println("cd: " + directory + ": No such file or directory");
     }
 }
