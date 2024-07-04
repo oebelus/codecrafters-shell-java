@@ -64,6 +64,7 @@ public class Commands {
 
         if (twoCount > 0) {
             String newPath = String.join("/", Arrays.copyOfRange(pwdArray, 0, pwdArray.length - twoCount));
+            System.out.println("NEWPATH: " + newPath + (pwdArray.length - twoCount));
             System.setProperty("user.dir", newPath);
         } else if (directory.startsWith("./")) {
             pwd += "/" + directory.substring(2);
