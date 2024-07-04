@@ -66,7 +66,7 @@ public class Commands {
             String newPath = String.join("/", Arrays.copyOfRange(pwdArray, 0, pwdArray.length - twoCount));
             System.setProperty("user.dir", newPath);
         } else if (directory.startsWith("./")) {
-            pwd += "\\" + directory.substring(2);
+            pwd += "/" + directory.substring(2);
             if (Files.exists(Paths.get(pwd)))
                 System.setProperty("user.dir", pwd);
             else {
