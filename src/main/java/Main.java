@@ -22,6 +22,8 @@ public class Main {
                     inShell = false;
                 } else if (cmd.equals("echo")) {
                     System.out.println(Utils.getEchoText(tokens));
+                } else if (cmd.equals("type")) {
+                    System.out.println(Commands.typeCommand(tokens[1]));
                 }
             }
         }
