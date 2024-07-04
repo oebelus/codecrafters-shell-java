@@ -20,6 +20,8 @@ public class Main {
             else {
                 if (cmd.equals("exit")) {
                     inShell = false;
+                } else if (cmd.equals("echo")) {
+                    System.out.println(Utils.getEchoText(tokens));
                 }
             }
         }
