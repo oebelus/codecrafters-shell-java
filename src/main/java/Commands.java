@@ -18,15 +18,15 @@ public class Commands {
         commands.add("cd");
     }
 
-    public static boolean commandExists(String command) {
+    public static boolean isBuiltin(String command) {
         return commands.contains(command);
     }
 
     public static String typeCommand(String cmd) {
-        if (commandExists(cmd))
+        if (isBuiltin(cmd))
             return cmd + " is a shell builtin";
         else
-            return Utils.findExecutableOnPath(cmd);
+            return Executables.findExecutableOnPath(cmd);
     }
 
     public static String programCommand() {
@@ -34,7 +34,7 @@ public class Commands {
     }
 
     public static String runProgram(String cmd, String name) throws IOException {
-        String exePath = Utils.findExecutableOnPath(cmd);
+        String exePath = Executables.findExecutableOnPath(cmd);
 
         String[] command = { exePath, name };
 
@@ -55,6 +55,9 @@ public class Commands {
         if (twoCount > 0) {
             String newPath = String.join("/", Arrays.copyOfRange(pwdArray, 0, pwdArray.length - twoCount));
             System.setProperty("user.dir", newPath);
+
+        } else if (directory.equals("~")) {
+            System.setProperty("user.dir", System.getenv("HOME"));
         } else if (directory.startsWith("./")) {
             pwd += "/" + directory.substring(2);
 
@@ -63,6 +66,7 @@ public class Commands {
             else {
                 System.out.println("cd: " + pwd + ": No such file or directory");
             }
+
         } else {
             if (Files.exists(path)) {
                 System.setProperty("user.dir", directory);

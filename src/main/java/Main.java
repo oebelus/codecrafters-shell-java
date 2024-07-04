@@ -14,7 +14,7 @@ public class Main {
             String[] tokens = Utils.tokenize(input);
             String cmd = tokens[0];
 
-            if (!Utils.isExecutable(cmd) && !Commands.commandExists(cmd))
+            if (!Executables.isExecutable(cmd) && !Commands.isBuiltin(cmd))
                 System.out.println(input + ": command not found");
 
             else {
