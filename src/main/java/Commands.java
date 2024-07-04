@@ -48,7 +48,7 @@ public class Commands {
     public static void changeDirectory(String directory) {
         Path path = Paths.get(directory);
         String pwd = getDirectory();
-        String[] pwdArray = pwd.split("\\\\");
+        String[] pwdArray = pwd.split("/");
         String[] relative = { "./", "../" };
 
         int index = 0;
@@ -63,6 +63,7 @@ public class Commands {
         }
 
         if (twoCount > 0) {
+            System.out.println(pwdArray.length);
             System.out.println((pwdArray.length - twoCount));
             String newPath = String.join("/", Arrays.copyOfRange(pwdArray, 0, pwdArray.length - twoCount));
             System.out.println("NEWPATH: " + newPath + (pwdArray.length - twoCount));
