@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,7 @@ public class Commands {
         commands.add("exit");
         commands.add("type");
         commands.add("pwd");
+        commands.add("cd");
     }
 
     public static boolean commandExists(String command) {
@@ -38,5 +42,13 @@ public class Commands {
 
     public static String getDirectory() {
         return System.getProperty("user.dir");
+    }
+
+    public static void changeDirectory(String directory) {
+        Path path = Paths.get(directory);
+        if (Files.exists(path))
+            System.setProperty("user.dir", directory);
+        else
+            System.out.println("cd: " + directory + ": No such file or directory");
     }
 }

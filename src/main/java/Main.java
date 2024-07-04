@@ -27,6 +27,8 @@ public class Main {
                     System.out.println(Commands.typeCommand(tokens[1]));
                 } else if (cmd.equals("pwd")) {
                     System.out.println(System.getProperty("user.dir"));
+                } else if (cmd.equals("cd")) {
+                    Commands.changeDirectory(tokens[1]);
                 } else {
                     System.out.println(Commands.runProgram(cmd, tokens[1]));
                 }
