@@ -14,19 +14,21 @@ public class Main {
             String[] tokens = Utils.tokenize(input);
             String cmd = tokens[0];
 
-            if (!Commands.commandExists(cmd))
+            if (!Utils.isExecutable(cmd) && !Commands.commandExists(cmd))
                 System.out.println(input + ": command not found");
 
             else {
                 if (cmd.equals("exit")) {
                     inShell = false;
+                    scanner.close();
                 } else if (cmd.equals("echo")) {
                     System.out.println(Utils.getEchoText(tokens));
                 } else if (cmd.equals("type")) {
                     System.out.println(Commands.typeCommand(tokens[1]));
+                } else {
+                    System.out.println(Commands.runProgram(cmd, tokens[1]));
                 }
             }
         }
-
     }
 }
