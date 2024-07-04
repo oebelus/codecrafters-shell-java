@@ -52,4 +52,19 @@ public class Utils {
 
         return output.toString().trim();
     }
+
+    public static int occurences(String substring, String string) {
+        int index = 0;
+        int count = 0;
+
+        while (index != -1) {
+            index = string.indexOf(substring, index);
+            if (index != -1) {
+                count++;
+                index += substring.length();
+            }
+        }
+
+        return count;
+    }
 }
