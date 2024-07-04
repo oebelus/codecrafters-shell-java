@@ -9,7 +9,6 @@ public class Commands {
         commands.add("cd");
         commands.add("exit");
         commands.add("type");
-        commands.add("cat");
     }
 
     public static boolean commandExists(String command) {
@@ -17,9 +16,6 @@ public class Commands {
     }
 
     public static String typeCommand(String cmd) {
-        if (commandExists(cmd))
-            return cmd + " is a shell builtin";
-        else
-            return cmd + ": not found";
+        return Utils.findExecutableOnPath(cmd);
     }
 }
