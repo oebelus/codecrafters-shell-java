@@ -16,7 +16,6 @@ public class Commands {
     }
 
     public static String typeCommand(String cmd) {
-        System.out.println(Utils.findExecutableOnPath(cmd));
         if (commandExists(cmd))
             return cmd + " is a shell builtin";
         else
