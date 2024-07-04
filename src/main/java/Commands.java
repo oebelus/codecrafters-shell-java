@@ -63,6 +63,7 @@ public class Commands {
         }
 
         if (twoCount > 0) {
+            System.out.println((pwdArray.length - twoCount));
             String newPath = String.join("/", Arrays.copyOfRange(pwdArray, 0, pwdArray.length - twoCount));
             System.out.println("NEWPATH: " + newPath + (pwdArray.length - twoCount));
             System.setProperty("user.dir", newPath);
