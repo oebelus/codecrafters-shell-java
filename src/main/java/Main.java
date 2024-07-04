@@ -1,17 +1,27 @@
 import java.util.Scanner;
 
 public class Main {
+    private static boolean inShell = true;
+
     public static void main(String[] args) throws Exception {
 
-        while (true) {
+        while (inShell) {
             System.out.print("$ ");
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
 
-            if (!Commands.commandExists(input))
+            String[] tokens = Utils.tokenize(input);
+            String cmd = tokens[0];
+
+            if (!Commands.commandExists(cmd))
                 System.out.println(input + ": command not found");
 
+            else {
+                if (cmd.equals("exit")) {
+                    inShell = false;
+                }
+            }
         }
 
     }

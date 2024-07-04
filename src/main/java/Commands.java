@@ -7,6 +7,7 @@ public class Commands {
     static {
         commands.add("echo");
         commands.add("cd");
+        commands.add("exit");
     }
 
     public static boolean commandExists(String command) {
