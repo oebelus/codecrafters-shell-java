@@ -12,7 +12,6 @@ public class Commands {
         commands.add("cd");
         commands.add("exit");
         commands.add("type");
-        commands.add("program_1234");
     }
 
     public static boolean commandExists(String command) {
